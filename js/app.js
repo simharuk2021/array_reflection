@@ -1,12 +1,14 @@
 var emails = [];
+var images=[];
 
 
 
 function randomImg(width, height) {
   
-    document.getElementById('img-container').innerHTML = '<img src="https://source.unsplash.com/random/'+width+'x'+height+'">';
+    var newImage = document.getElementById('img-container').innerHTML = '<img src="https://source.unsplash.com/random/'+width+'x'+height+'">';
+  images.push(newImage);
+  console.log(images);
   }
-
 
   const button = document.getElementById('image');
   const form = document.querySelector('.form');
