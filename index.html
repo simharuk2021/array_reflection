@@ -31,24 +31,30 @@
 
         <section id="form-choice">
             <div class="container">
-                <h2>Do you want this image?</h2>
-                <div class="form-wrapper">
-                    <div class="form-email">
-                        <label class="required">Your Email</label>
-                        <input type="email" class="user_email form-control">
+                <form class="form">
+                    <div class="email input-control">
+
+                        <label for="email">E-Mail: </label>
+
+                        <input type="text" id="email" class="form-control" placeholder="Email Address">
+                        <div class="error"></div>
                     </div>
-                </div>
+                    <div class="submit-wrapper">
+                        <button type="submit" class="button button-submit none">Submit</button>
+                    </div>
+                </form>
+            </div>
             </div>
         </section>
 
-     
 
-<div id="button-container">
-    <button onclick="randomImg(500, 500);">Get an Image</button>
-  </div>
-  <div id="img-container"></div>
-  
-  
+
+        <div id="button-container">
+            <button id="image">Get an Image</button>
+        </div>
+        <div id="img-container"></div>
+
+
 
         <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
