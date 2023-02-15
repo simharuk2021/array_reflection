@@ -1,10 +1,10 @@
 var emails = [];
 var images = [];
-var arrayCombined = [];
+var array = [];
 var obj = {};
 
 
-// loop through email and image array and push to arrayComibined
+// loop through email and image array and push to arrayCombined
 
 // function combine() {
 //   for (var i = 0; i < emails.length; i++) {
@@ -23,7 +23,7 @@ try{
   if(!response.ok){
     throw new Error(`Could not fetch ${url}, received ${response.status}`);
   }
-  const data = await response.url;
+  const data = response.url;
   return data;
 }
   catch(error) {
@@ -47,11 +47,11 @@ button.addEventListener('click', async function() {
 
 
  async function generateImage() {
+  const image= await getImage();
   const html =  `
-    <img src='${getImage(data)}' alt>
+    <img src='${image}' id="card-image">
   `;
   card.innerHTML = html;
-console.log(generateImage())
 }
 
 
@@ -62,26 +62,25 @@ form.addEventListener('submit', e => {
 });
 
 
-
-
-
-
 const setError = (element, message) => {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector('.error');
+  const successDisplay = inputControl.querySelector('.success');
 
-
+  successDisplay.innerText = '';
   errorDisplay.innerText = message;
   inputControl.classList.add('error');
   inputControl.classList.remove('success')
 }
 
-const setSuccess = element => {
+const setSuccess = (element, smessage) => {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector('.error');
+  const successDisplay = inputControl.querySelector('.success');
 
   errorDisplay.innerText = '';
   errorDisplay.innerText = '';
+  successDisplay.innerText = smessage;
   inputControl.classList.add('success');
   inputControl.classList.remove('error');
 };
@@ -103,11 +102,21 @@ const validateInputs = () => {
     if (emails.includes(emailValue)) {
       setError(email, 'Email already exists');
     } else {
+      setSuccess(email, 'Email added successfully');
       emails.push(emailValue);
-      setSuccess(email)
-      console.log(emails);
+      for (let i = 0; i < emails.length; i++) {
+        console.log(emails[i]);
+      }
     }
   }
 };
+
+function newImage(){
+
+}
+
+
+
+
 
 
