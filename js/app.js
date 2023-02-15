@@ -104,16 +104,33 @@ const validateInputs = () => {
     } else {
       setSuccess(email, 'Email added successfully');
       emails.push(emailValue);
-      for (let i = 0; i < emails.length; i++) {
-        console.log(emails[i]);
-      }
+      pushImage();
     }
   }
 };
 
-function newImage(){
-
+// push image to array
+const pushImage = () => {
+  const image = document.getElementById('card-image');
+  images.push(image);
 }
+
+
+
+// push an image and an email to an array
+
+// function pushToArray() {
+//   for (var i = 0; i < emails.length; i++) {
+//     for (var j = 0; j < images.length; j++) {
+//       array.push([emails[i], images[j]]);
+//     }
+//   }
+// }
+
+
+// function newImage(){
+
+// }
 
 
 
