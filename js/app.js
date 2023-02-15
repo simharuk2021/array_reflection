@@ -1,7 +1,10 @@
+generateImage();
+
+
 var emails = [];
-var images = [];
+var images = {'images':[]};
 var array = [];
-var obj = {};
+var obj = {'': []};
 
 
 // loop through email and image array and push to arrayCombined
@@ -40,7 +43,7 @@ const card = document.querySelector('.card');
 
 
 button.addEventListener('click', async function() {
-  console.log( await getImage());
+  // console.log( await getImage());
   generateImage();
 });
 
@@ -103,36 +106,43 @@ const validateInputs = () => {
       setError(email, 'Email already exists');
     } else {
       setSuccess(email, 'Email added successfully');
-      emails.push(emailValue);
+      // emails.push(emailValue);
+      array.push(emailValue);
       pushImage();
-      pushToArray();
     }
   }
 };
+
+// check if the email is within the array and push image to the email value, else push email and image to the array
 
 // push image to array
 const pushImage = () => {
   const image = document.getElementById('card-image');
   const newImage= image.src;
-  images.push(newImage);
+  array.push({newImage});
 }
 
 // push an image and an email to an array
 
-function pushToArray() {
-  for (var i = 0; i < emails.length; i++) {
-    for (var j = 0; j < images.length; j++) {
-      array.push([emails[i], images[j]]);
-    }
-  }
-}
+// function pushToArray() {
+//   for (var i = 0; i < emails.length; i++) {
+//     for (var j = 0; j < images.length; j++) {
+//       array.push([emails[i], images[j]]);
+//     }
+//   }
+// }
 
 
 // function newImage(){
 
 // }
 
-
+// function to generate an image
+// function to display the image in the html
+// function to validate the email address
+// function to check if the email address already exists in the array
+// function to check if the image is already linked to the email address in the array
+// function to set the email address to the image and push it to the array
 
 
 
