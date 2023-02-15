@@ -2,7 +2,7 @@ generateImage();
 
 
 var emails = [];
-var images = {'images':[]};
+var images = {'images':''};
 var array = [];
 var obj = {'': []};
 
@@ -114,6 +114,7 @@ const validateInputs = () => {
 };
 
 // check if the email is within the array and push image to the email value, else push email and image to the array
+// can I loop through the array and access the objects inside the array?
 
 // push image to array
 const pushImage = () => {
