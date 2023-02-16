@@ -3,8 +3,8 @@ generateImage();
 
 var emails = [];
 var images = {'images':''};
-var array = [];
-var obj = {'': []};
+var array = {'': []};
+var obj = {'': ['']};
 
 
 // loop through email and image array and push to arrayCombined
@@ -49,7 +49,7 @@ button.addEventListener('click', async function() {
 
 
 
- async function generateImage() {
+async function generateImage() {
   const image= await getImage();
   const html =  `
     <img src='${image}' id="card-image">
@@ -107,7 +107,7 @@ const validateInputs = () => {
     } else {
       setSuccess(email, 'Email added successfully');
       // emails.push(emailValue);
-      array.push(emailValue);
+      // array.push(emailValue);
       pushImage();
     }
   }
@@ -120,7 +120,9 @@ const validateInputs = () => {
 const pushImage = () => {
   const image = document.getElementById('card-image');
   const newImage= image.src;
-  array.push({newImage});
+  const newEmail = email.value;
+  array[newEmail]= [newImage];
+  console.log(array);
 }
 
 // push an image and an email to an array
