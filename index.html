@@ -31,14 +31,14 @@
 
         <section id="form-choice">
             <div class="container">
-                <form class="form">
-                    <div class="email input-control">
+                <form class="form" id="form">
+                   
 
                         <label for="email">E-Mail: </label>
-
-                        <input type="text" id="email" class="form-control" placeholder="Email Address">
+                        <!-- <input class="email-input" type="email" id="email" name="email"> -->
+                        <input type="text" id="email" class="form-control" placeholder="Email Address" name="email">
                         <div class="error success"></div>
-                    </div>
+                    
                     <div class="submit-wrapper">
                         <button type="submit" class="button button-submit none">Submit</button>
                     </div>
@@ -46,14 +46,16 @@
             </div>
             </div>
         </section>
-        <div class=image-container>
-            <div class="card"></div>
+        <div class="img-wrap">
+            
+          </div>
+          <div id="img-container">
+            <img id="image" class="mainImg" src="data:," alt>
         </div>
-
         <div id="button-container">
-            <button id="image">Get an Image</button>
+            <button id="get-image">Get an Image</button>
         </div>
-        <div id="img-container"></div>
+  
 
         <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>

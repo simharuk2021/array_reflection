@@ -1,61 +1,60 @@
-generateImage();
-
-
 var emails = [];
-var images = {'images':''};
-var array = {'': []};
-var obj = {'': ['']};
+var images = { 'images': '' };
+var array = { "email:''": [] };
+var obj = { '': [''] };
+const memoryArray = [];
+let emailVar;
+let url;
+
+const src = 'https://picsum.photos/200/300';
 
 
-// loop through email and image array and push to arrayCombined
+function getImage() {
+  fetch(src).then(response => {
+    if (response.status >= 400) {
+      return response.json().then(errData => {
+        const error = new Error('something went wrong');
+        error.data = errData;
+        throw error;
+      });
+    }
+    $('#image').attr('src', response.url);
+    url = response.url;
+  }).catch((error) =>
+    console.log("Error: " + error));
+}
 
-// function combine() {
-//   for (var i = 0; i < emails.length; i++) {
-//     for (var j = 0; j < images.length; j++) {
-//       arrayCombined[emails[i],images[j]];
-//     }
-//   }
+
+
+
+function getEmail() {
+  var searchResult;
+    for (var i = 0, j = memoryArray.length; i < j; i++) {
+      if (memoryArray[i][0] === emailVar) {
+        
+        searchResult = storage[i];
+        return searchResult;
+      }
+    }
+}
+
+$(window).on('load', getImage);
+$('#get-image').on('click', getImage);
+
+
+
+
+
+
+
+
+// async function generateImage() {
+//   const image = await getImage();
+//   const html = `
+//     <img src='${image}' id="card-image">
+//   `;
+//   card.innerHTML = html;
 // }
-// console.log(arrayCombined);
-
-
-async function getImage (url = 'https://picsum.photos/200/300'){
-try{
-  const response = await fetch(url);
-
-  if(!response.ok){
-    throw new Error(`Could not fetch ${url}, received ${response.status}`);
-  }
-  const data = response.url;
-  return data;
-}
-  catch(error) {
-    console.error(`could not fulfill request: ${error}`);
-  }
-
-}
-
-
-const button = document.getElementById('image');
-const form = document.querySelector('.form');
-const email = document.getElementById('email');
-const card = document.querySelector('.card'); 
-
-
-button.addEventListener('click', async function() {
-  // console.log( await getImage());
-  generateImage();
-});
-
-
-
-async function generateImage() {
-  const image= await getImage();
-  const html =  `
-    <img src='${image}' id="card-image">
-  `;
-  card.innerHTML = html;
-}
 
 
 form.addEventListener('submit', e => {
@@ -103,27 +102,29 @@ const validateInputs = () => {
   } else {
     // if email already exists in array, message is displayed
     if (emails.includes(emailValue)) {
-      setError(email, 'Email already exists');
+      setError(email, 'Image already exists');
     } else {
-      setSuccess(email, 'Email added successfully');
-      // emails.push(emailValue);
-      // array.push(emailValue);
-      pushImage();
+      setSuccess(email, 'Image pushed to email');
+      emailVar = document.forms["form"]["email"].value;
+      memoryArray.push([email, url]);
     }
   }
 };
 
-// check if the email is within the array and push image to the email value, else push email and image to the array
-// can I loop through the array and access the objects inside the array?
+// check if the email is within the array a
+
+
 
 // push image to array
 const pushImage = () => {
+
   const image = document.getElementById('card-image');
-  const newImage= image.src;
+  const newImage = image.src;
   const newEmail = email.value;
-  array[newEmail]= [newImage];
+  array[newEmail] = [newImage];
   console.log(array);
 }
+
 
 // push an image and an email to an array
 
