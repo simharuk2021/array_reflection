@@ -87,6 +87,8 @@ img {
   box-sizing: border-box;
   text-align: center;
   z-index: 2;
+  margin-bottom: 3rem;
+  color: #5122a2;
 }
 
 #confirm button {
@@ -97,17 +99,20 @@ img {
   padding: 5px;
   text-align: center;
   width: 60px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 #confirm button:hover {
-  background-color: #4cc0ee;
+  background: linear-gradient(50deg, #4cc0ee, #4945c7);
 }
 
 #confirm .message {
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
+  position: relative;
+  top: 30%;
 }
 
 .imgDisplay__head {
