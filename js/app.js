@@ -1,153 +1,101 @@
-var emails = [];
-var images = { 'images': '' };
-var array = { "email:''": [] };
-var obj = { '': [''] };
-const memoryArray = [];
-let emailVar;
+const src = 'https://picsum.photos/300';
+const regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+const storage = [];
+let email;
 let url;
+let x = 0;
+let y = 0;
+let z = 0;
 
-const src = 'https://picsum.photos/200/300';
+function newImg() {
+    fetch(src).then(response => {
+        if (response.status >= 400) {
+            return response.json().then(errData => {
+                const error = new Error('Something went wrong!');
+                error.data = errData;
+                throw error;
+            });
 
-
-function getImage() {
-  fetch(src).then(response => {
-    if (response.status >= 400) {
-      return response.json().then(errData => {
-        const error = new Error('something went wrong');
-        error.data = errData;
-        throw error;
-      });
-    }
-    $('#image').attr('src', response.url);
-    url = response.url;
-  }).catch((error) =>
+        }
+        $('.mainImg').attr("src", response.url);
+        url = response.url;
+    }).catch((error) => 
     console.log("Error: " + error));
 }
 
 
+function search(email) {
+    var result;
 
+    for (var i = 0, len = storage.length; i < len; i++) {
 
-function getEmail() {
-  var searchResult;
-    for (var i = 0, j = memoryArray.length; i < j; i++) {
-      if (memoryArray[i][0] === emailVar) {
-        
-        searchResult = storage[i];
-        return searchResult;
-      }
+        if (storage[i][0] === email) {
+
+            result = storage[i];
+
+            break;
+        }
+
     }
+
+    return result;
 }
 
-$(window).on('load', getImage);
-$('#get-image').on('click', getImage);
+
+$(window).on('load', newImg);
+$('#genNewImg').on('click', newImg);
+
+$('#assignTo').on('click', () => {
+    email = document.forms["formSubmit"]["email"].value;
+
+    if (regex.test(email) == false) {
+        functionAlert();
+    }
+    else if (!search(email)) {
+
+        storage.push([email, url]);
+        var option = $("<option></option").text(email).attr("value", z=0);
+        $('#saved__Emails').append(option);
+        newImg();
+        z++;
 
 
+    } else if (search(email)) {
+        x = storage.findIndex(e => e.includes(email));
+        storage[x].push(url);
+        newImg();
 
-
-
-
-
-
-// async function generateImage() {
-//   const image = await getImage();
-//   const html = `
-//     <img src='${image}' id="card-image">
-//   `;
-//   card.innerHTML = html;
-// }
-
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  validateInputs();
+    }
+    
+    updateImg();
 });
 
 
-const setError = (element, message) => {
-  const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector('.error');
-  const successDisplay = inputControl.querySelector('.success');
 
-  successDisplay.innerText = '';
-  errorDisplay.innerText = message;
-  inputControl.classList.add('error');
-  inputControl.classList.remove('success')
-}
+$('#saved__Emails').change(updateImg);
 
-const setSuccess = (element, smessage) => {
-  const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector('.error');
-  const successDisplay = inputControl.querySelector('.success');
 
-  errorDisplay.innerText = '';
-  errorDisplay.innerText = '';
-  successDisplay.innerText = smessage;
-  inputControl.classList.add('success');
-  inputControl.classList.remove('error');
-};
+function updateImg() {
+    if ($('#saved__Emails').val() === "none") {
+        $("img").remove(".items");
+    } else if ($('#saved__Emails').val()) {
+        var indexer = $('#saved__Emails').val();
+        $("img").remove(".items");
+        for (var p = 1; p < storage[indexer].length; p++) {
 
-const isValidEmail = email => {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
+            content = $('<img class="items">').attr("src", storage[indexer][p]);
+            $('.imgDisplayContainer div div').append(content);
+        }
 
-const validateInputs = () => {
-  const emailValue = email.value.trim();
-
-  if (emailValue === '') {
-    setError(email, 'Email is required');
-  } else if (!isValidEmail(emailValue)) {
-    setError(email, 'Provide a valid email address');
-  } else {
-    // if email already exists in array, message is displayed
-    if (emails.includes(emailValue)) {
-      setError(email, 'Image already exists');
-    } else {
-      setSuccess(email, 'Image pushed to email');
-      emailVar = document.forms["form"]["email"].value;
-      memoryArray.push([email, url]);
     }
-  }
 };
 
-// check if the email is within the array a
-
-
-
-// push image to array
-const pushImage = () => {
-
-  const image = document.getElementById('card-image');
-  const newImage = image.src;
-  const newEmail = email.value;
-  array[newEmail] = [newImage];
-  console.log(array);
-}
-
-
-// push an image and an email to an array
-
-// function pushToArray() {
-//   for (var i = 0; i < emails.length; i++) {
-//     for (var j = 0; j < images.length; j++) {
-//       array.push([emails[i], images[j]]);
-//     }
-//   }
-// }
-
-
-// function newImage(){
-
-// }
-
-// function to generate an image
-// function to display the image in the html
-// function to validate the email address
-// function to check if the email address already exists in the array
-// function to check if the image is already linked to the email address in the array
-// function to set the email address to the image and push it to the array
-
-
-
-
+function functionAlert(msg, myYes) {
+    var confirmBox = $("#confirm");
+    confirmBox.find(".message").text(msg);
+    confirmBox.find(".yes").unbind().click(function() {
+       confirmBox.hide();
+    });
+    confirmBox.find(".yes").click(myYes);
+    confirmBox.show();
+ }
