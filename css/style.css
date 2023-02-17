@@ -71,6 +71,7 @@ img {
 
 .main-content {
   background-color: black;
+  z-index: 1;
 }
 
 #confirm {
@@ -85,6 +86,7 @@ img {
   top: 40%;
   box-sizing: border-box;
   text-align: center;
+  z-index: 2;
 }
 
 #confirm button {
@@ -123,4 +125,5 @@ img {
   margin: 5px;
   border-radius: 5px;
   box-shadow: #383636 1px 0px 5px 1px;
+  z-index: 1;
 }

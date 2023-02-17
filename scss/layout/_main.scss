@@ -75,6 +75,7 @@ margin:2rem;
 
 .main-content{
 background-color: black;
+z-index:1;
 }
 
 
@@ -90,6 +91,7 @@ background-color: black;
     top: 40%;
     box-sizing: border-box;
     text-align: center;
+    z-index:2
 
  }
  #confirm button {
@@ -113,31 +115,13 @@ background-color: black;
     text-align: center;
     font-weight:bold ;
     text-transform: uppercase;
+    
   
 
    
  }
 
-// .card {
-//     display: flex;
-//     height: 200px;
-//     width: 200px;
-//     text-align: center;
-//     border-radius: 6px;
-//     background-color: #fff;
-//     border: solid 2px #f0dce5;
-//     margin-bottom: 24px; }
-//     .card img {
-//         height: 200px;
-//         width: 200px;
-//       border-radius: 4px;
-//       margin-bottom: 2.25rem;
-//       cursor: pointer;
-//       width: 100%; }
 
-//       img {    height: 200px;
-//         width: 200px;
-//         }
 
 .imgDisplay__head {
     margin-top: 1rem;
@@ -156,7 +140,7 @@ background-color: black;
 }
 
 .imgDisplayContainer {
-
+ 
 
     >.row {
 
@@ -167,6 +151,7 @@ background-color: black;
                 margin: 5px;
                 border-radius: 5px;
                 box-shadow: rgb(56, 54, 54) 1px 0px 5px 1px;
+                z-index:1;
             }
         }
 
