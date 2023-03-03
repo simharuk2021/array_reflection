@@ -53,28 +53,33 @@ $('#genNewImg').on('click', newImg);
 // this function stores the email and the url of the image in the array
 $('#assignTo').on('click', () => {
     email = document.forms["formSubmit"]["email"].value;
-
     if (regex.test(email) == false) {
         functionAlert();
     }
     // checks of the email is already within the array by calling the search function, if false then pushes the email and url to 
     // the array
     else if (!search(email)) {
-
+        
         storage.push([email, url]);
         var option = $("<option></option").text(email).attr("value", z);
+        
         $('#saved__Emails').append(option);
+        
         newImg();
         z++;
-
-// if the result of the search function is true then the email is already in the array and the url is pushed to 
-// the located email address within the array and a new image is fetched
+        
+        
+        // if the result of the search function is true then the email is already in the array and the url is pushed to 
+        // the located email address within the array and a new image is fetched
     } else if (search(email)) {
+        
         x = storage.findIndex(e => e.includes(email));
         storage[x].push(url);
+        
         newImg();
-
+        
     }
+   
     
     updateImg();
 });
@@ -92,11 +97,12 @@ function updateImg() {
         var indexer = $('#saved__Emails').val();
         $("img").remove(".items");
         for (var p = 1; p < storage[indexer].length; p++) {
-
+          
+            
             content = $('<img class="items">').attr("src", storage[indexer][p]);
             $('.imgDisplayContainer div div').append(content);
         }
-
+        
     }
 };
 
