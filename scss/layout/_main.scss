@@ -59,12 +59,15 @@ img {
 }
 
 #formSubmit{
-margin:2rem;
+margin-top:2rem;
+margin-bottom: 2rem;
+width: 100%;
 }
 
 #email{
     height:40px;
-    width:300px;
+    max-width: 300px;
+    width: 100%;
     padding:1rem;
 }
 
